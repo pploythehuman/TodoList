@@ -1,0 +1,71 @@
+$font-family-base: 'Roboto', sans-serif;
+$color-base-outside: #D1D0D9;
+$color-base-inside:#F5F5F5;
+$color-primary:#585292;
+$color-primary-light: #9796A8;
+$color-secondary:#E07C7C;
+$color-secondar-ligth:#EBB9B8;
+$color-black: #2E2E2E;
+
+body {
+  margin: 0;
+  font-family: 'Asap', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: $color-base-outside;
+}
+
+@mixin text {
+  font-size: 16px;
+  font-weight: 400;
+  color: #2E2E2E;
+  line-height: 18.75px;
+}
+
+p {
+  @include text;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 720px;
+  height: 500px;
+  // height: 620px;
+  left: 280px;
+  top: 42px;
+  background: $color-base-inside;
+  border-radius: 20px;
+}
+
+.task-input {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 518px;
+  height: 46px;
+  background: #FFFFFF;
+  border-radius: 9999px;
+  border: none;
+  padding: 0px 20px 0px 20px;
+  @include text;
+}
+
+.task-input:focus {
+  outline: none;
+  border: none;
+}
+
+.task-input::placeholder {
+  @include text;
+  color: #BCBCBC;
+}
+
