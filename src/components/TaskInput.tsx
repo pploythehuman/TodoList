@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PieChartOutlined } from '@ant-design/icons';
 
 //placeholder, value, onChange, maxlength?
@@ -10,10 +10,16 @@ interface TaskInputProps {
 }
 
 const TaskInput: React.FC<TaskInputProps> = ({ value, placeholder, onChange, maxlength }) => {
+  const [inputValue, setInputValue] = useState('');
+  
+  const handleChange = (event: any) => {
+    setInputValue(event.target.value);
+  }
 
   const handleSubmit = (event: any) => {
     if (event.key === 'Enter') {
-      alert('hello');
+      alert(inputValue);
+      setInputValue('');
     }
   }
   return (
@@ -21,6 +27,8 @@ const TaskInput: React.FC<TaskInputProps> = ({ value, placeholder, onChange, max
       className="task-input" 
       type="text" 
       placeholder={placeholder}
+      value={inputValue}
+      onChange={handleChange}
       onKeyDown={handleSubmit}
     />
   );
