@@ -75,8 +75,8 @@ p {
 
 /* Task Item */
 .task-item {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr auto;
   align-items: center;
   width: 518px;
   height: 46px;
@@ -116,7 +116,6 @@ p {
 }
 
 .task-item-title {
-  width: 300px; // need to fix
   border: none;
   @include text;
 }
@@ -129,6 +128,7 @@ p {
 .task-item-save-button {
   width: 64px;
   height: 36px;
+  margin-left: 10px;
   background: $color-primary;
   border-radius: 999px;
   border: none;

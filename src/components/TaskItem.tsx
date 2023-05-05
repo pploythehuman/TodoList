@@ -8,7 +8,7 @@ interface TaskItemProps {
   maxlength?: number;
 }
 
-const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=20 }) => {
+const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=45 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -42,7 +42,7 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=20 }) => 
   return(
     <div className="task-item" ref={containerRef}>
       <div className="task-item-checkbox">    
-        <label>
+        <label style={{ display: 'grid', gridTemplateColumns: 'auto 1fr'}}>
           <input type="checkbox" />
           <input 
             className="task-item-title" 
@@ -61,7 +61,6 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=20 }) => 
       ) : (
         <EllipsisButton onEdit={handleEdit}/>
       )}
-      
     </div>
   );
 };
