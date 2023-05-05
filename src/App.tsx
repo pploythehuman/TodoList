@@ -3,11 +3,19 @@ import React from 'react';
 import './index.scss'
 import TaskInput from '../src/components/TaskInput';
 import TaskItem from '../src/components/TaskItem';
+import ProgressBar from '../src/components/ProgressBar';
+import SortingSelect from '../src/components/SortingSelect';
 
 function App() {
   return (
     <div className="app-container">
       <div className="main-container">
+        <ProgressBar completeAmount={12} totalAmount={20}/>
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between" }}>
+          <h3 style={{ margin: "0px" }}>Tasks</h3>
+          <SortingSelect />
+        </div>
+        
         <TaskInput 
           value="Add" 
           placeholder="Add your todo..." 
