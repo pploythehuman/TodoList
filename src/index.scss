@@ -114,6 +114,31 @@ p {
   justify-content: center;
   height: 100%;
 }
+
+.task-item-title {
+  width: 300px; // need to fix
+  border: none;
+  @include text;
+}
+
+.task-item-title:focus {
+  border: none;
+  outline: none;
+}
+
+.task-item-save-button {
+  width: 64px;
+  height: 36px;
+  background: $color-primary;
+  border-radius: 999px;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.task-item-save-button:hover {
+  background-color: $color-primary-light;
+}
 /* Task Item End */
 
 /* Ellipsis Button */

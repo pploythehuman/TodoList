@@ -2,19 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { EllipsisOutlined } from '@ant-design/icons';
 
 interface EllipsisButtonProps {
-
+  onEdit: () => void;
 }
 
-const EllipsisButton: React.FC<EllipsisButtonProps> = () => {
+const EllipsisButton: React.FC<EllipsisButtonProps> = ({ onEdit }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleEllipsisClick = () => {
     setDropdownVisible(!dropdownVisible);
-  };
-
-  const handleEdit = () => {
-    setDropdownVisible(false);
   };
 
   const handleDelete = () => {
@@ -40,7 +36,7 @@ const EllipsisButton: React.FC<EllipsisButtonProps> = () => {
         <EllipsisOutlined />
       </button>
       <div className={`dropdown ${dropdownVisible ? 'visible' : ''}`}>
-        <div className="dropdownItem" onClick={handleEdit}>
+        <div className="dropdownItem" onClick={onEdit}>
           Edit
         </div>
         <div className="dropdownItem" onClick={handleDelete}>
