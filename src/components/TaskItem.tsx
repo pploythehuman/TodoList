@@ -1,5 +1,6 @@
 import React from 'react';
-import { EllipsisOutlined } from '@ant-design/icons';
+
+import EllipsisButton from './EllipsisButton';
 
 interface TaskItemProps {
   title: string;
@@ -12,10 +13,11 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=50 }) => 
     <div className="task-item">
       <div className="task-item-checkbox">    
         <label>
-          <input className="task-item-checkbox-input" type="checkbox" />
+          <input className="task-item-checkbox-input" type="checkbox" checked={isChecked} />
+          <p>{title.length < maxlength? title : `${title.slice(0, maxlength)}...` }</p>
         </label>
       </div>  
-      <p>{title.length < maxlength? title : `${title.slice(0, maxlength)}...` }</p>
+      <EllipsisButton />
     </div>
   );
 };
