@@ -3,12 +3,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import EllipsisButton from './EllipsisButton';
 
 interface TaskItemProps {
+  taskId: string;
   title: string;
   isChecked: boolean;
   maxlength?: number;
+  onDelete: Function;
 }
 
-const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=45 }) => {
+const TaskItem:React.FC<TaskItemProps>= ({ taskId, title, maxlength=45, onDelete }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -24,6 +26,10 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=45 }) => 
     setTitleValue(tempTitleValue);
     setIsEditing(false)
   }
+
+  const handleDelete = () => {
+    onDelete(taskId);
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
@@ -59,7 +65,7 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=45 }) => 
           Save
         </button>
       ) : (
-        <EllipsisButton onEdit={handleEdit}/>
+        <EllipsisButton onEdit={handleEdit} onDelete={handleDelete}/>
       )}
     </div>
   );

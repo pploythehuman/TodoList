@@ -5,12 +5,6 @@ interface SortingSelectProps {
 }
 
 const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
-  const options = [
-    { id: 'select-all', value: 'all', label: 'All' },
-    { id: 'select-done', value: 'done', label: 'Done'  },
-    { id: 'select-undone', value: 'undone', label: 'Undone'  },
-  ]
-
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [selectValue, setSelectValue] = useState('All');
@@ -26,13 +20,6 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
     }
     setIsDropdownOpen(false);
   }
-
-  // const selectItem = (value: string, id: string, label: string) => (
-  //   <>
-  //     <label className="select-item" htmlFor={id}>{label}</label>
-  //     <input className="option" id={id} type="radio" name="option" value={value} onChange={handleOptionChange} />
-  //   </>
-  // )
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {

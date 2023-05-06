@@ -27,11 +27,32 @@ function App() {
   // const result = await markTask("5fe3f4ca-193c-4170-83c1-cb5a19908601", false);
   // const result = await changeTaskTitle("ZG_Ly6K", "new title Z")
 
+  const handleCreateTask = async(title: string) => {
+    const newTask = await createTask(title);
+    setTasks((prevTask) => [newTask, ...prevTask]);
+  }
+
+  const handleChangeTaskTitle = async(taskId: string, newTitle: string) => {
+    await changeTaskTitle(taskId, newTitle);
+    setTasks((prevTask) => 
+      prevTask.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, title: newTitle}
+        }
+        return task;
+      })
+    );
+  }
+
+  const handleDeleteTask = async(taskId: string) => {
+    await deleteTask(taskId);
+    setTasks((prevTask) => prevTask.filter((task) => task.id !== taskId));
+  }
+
   useEffect(() => {
     const fetchTaskData = async() => {
       const result = await getTasks();
-      setTasks(result);
-      console.log("result tasks", result);
+      setTasks(result.reverse());
     }
     fetchTaskData();
   }, [])
@@ -50,16 +71,10 @@ function App() {
             return(
               <TaskItem 
               key={taskItem.id}
+              taskId={taskItem.id}
               title={taskItem.title}
               isChecked={taskItem.completed}
-            />
-          )})}
-          {tasks.map((taskItem: ITask) =>{
-            return(
-              <TaskItem 
-              key={taskItem.id}
-              title={taskItem.title}
-              isChecked={taskItem.completed}
+              onDelete={handleDeleteTask}
             />
           )})}
         </div>
@@ -67,9 +82,8 @@ function App() {
         <TaskInput 
           value="Add" 
           placeholder="Add your todo..." 
-          onChange={()=>{}}
+          onSubmit={handleCreateTask}
         />
-        
       </div>
     </div>
   );

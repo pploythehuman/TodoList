@@ -3,9 +3,10 @@ import { EllipsisOutlined } from '@ant-design/icons';
 
 interface EllipsisButtonProps {
   onEdit: () => void;
+  onDelete: Function;
 }
 
-const EllipsisButton: React.FC<EllipsisButtonProps> = ({ onEdit }) => {
+const EllipsisButton: React.FC<EllipsisButtonProps> = ({ onEdit, onDelete }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
@@ -13,7 +14,8 @@ const EllipsisButton: React.FC<EllipsisButtonProps> = ({ onEdit }) => {
     setDropdownVisible(!dropdownVisible);
   };
 
-  const handleDelete = () => {
+  const handleDelete = async() => {
+    onDelete();
     setDropdownVisible(false);
   };
 
