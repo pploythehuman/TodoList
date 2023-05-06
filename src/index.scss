@@ -241,21 +241,62 @@ h2 {
 /* Progress Bar End */
 
 /* Sorting Select */
-.sorting-select {
-  // appearance: none;
-  width: 110px;
-  height: 29px;
-  background: white;
-  border-radius: 10px;
-  border: none;
-  font-size: 13px;
-  padding: 5px 5px 5px 5px !important;
-  box-sizing: border-box;
+.sorting-select-group {
+  display: 'flex'; 
+  flex-direction: 'column';
+  position: relative;
 }
 
-.sorting-select:focus {
-  outline: none;
+.sorting-select-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 110px;
+  height: 29px;
+  border-radius: 10px;
   border: none;
+  background-color: white;
+  padding: 5px 15px;
+  cursor: pointer;
+
+  .arrow {
+    border: solid $color-black;
+    border-width: 0 1.3px 1.3px 0;
+    padding: 1.6px;
+    transform: rotate(45deg);
+  }
+}
+
+.sorting-select-dropdown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  z-index: 1001;
+  width: 100%;
+  height: 109px;
+  border-radius: 20px;
+  margin-top: 3px;
+  background-color: white;
+  overflow: hidden;
+  @include text;
+  font-size: 13px;
+
+  .select-item {
+    padding: 9px 10px;    
+  }
+
+  .select-item:hover {
+    background-color: #f5f5f5;
+  }
+
+  .option {
+    display: none;
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 /* Sorting Select End */
