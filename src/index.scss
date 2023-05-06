@@ -47,13 +47,23 @@ h2 {
   justify-content: space-between;
   align-items: stretch; //center
   width: 720px;
-  height: 500px;
-  // height: 620px;
+  // height: 500px;
+  height: 620px;
+
+  // width: 60%;
+  // height: 85%;
+
   background: $color-base-inside;
   border-radius: 20px;
   padding: 50px 100px 50px 100px;
   box-sizing: border-box;
 
+}
+
+.tasks-container {
+  height: 50%;
+  overflow-y: auto;
+  scroll-behavior: auto;
 }
 
 /* Task Input */
@@ -88,6 +98,7 @@ h2 {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: center;
+  margin-bottom: 10px;
   // width: 518px;
   width: 100%;
   height: 46px;

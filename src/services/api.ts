@@ -4,12 +4,12 @@ const baseURL =  "http://localhost:3001"
 
 const getTasks = async() => {
   const response = await axios.get(`${baseURL}/todos`);
-  return response;
+  return response.data;
 }
 
 const deleteTask = async(taskId: string) => {
   const response = await axios.delete(`${baseURL}/todos/${taskId}`);
-  return response;
+  return response.data;
 }
 
 const createTask = async(title: string) => {
@@ -19,7 +19,7 @@ const createTask = async(title: string) => {
     headers: {
         'Content-Type': 'application/json',
   }})
-  return response;
+  return response.data;
 }
 
 const markTask = async(taskId: string, isCompleted: boolean) => {
@@ -29,7 +29,7 @@ const markTask = async(taskId: string, isCompleted: boolean) => {
     headers: {
       'Content-Type': 'application/json',
   }})
-  return response;
+  return response.data;
 }
 
 const changeTaskTitle = async(taskId: string, newTitle: string) => {
@@ -39,7 +39,7 @@ const changeTaskTitle = async(taskId: string, newTitle: string) => {
     headers: {
       'Content-Type': 'application/json',
   }})
-  return response;
+  return response.data;
 }
 
 export {
