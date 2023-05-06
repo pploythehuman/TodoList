@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 interface SortingSelectProps {
 
@@ -10,6 +10,8 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
     { id: 'select-done', value: 'done', label: 'Done'  },
     { id: 'select-undone', value: 'undone', label: 'Undone'  },
   ]
+
+  const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [selectValue, setSelectValue] = useState('All');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -32,8 +34,21 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
   //   </>
   // )
 
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (containerRef.current && !containerRef?.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, [containerRef])
+
   return (
-    <div className="sorting-select-group">
+    <div className="sorting-select-group" ref={containerRef}>
       <button className="sorting-select-button" onClick={toggleDropdown}>
         <p style={{ fontSize: '13px' }}>{selectValue}</p>
         <div className="arrow" />

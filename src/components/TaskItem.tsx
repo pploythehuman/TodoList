@@ -29,11 +29,11 @@ const TaskItem:React.FC<TaskItemProps>= ({ title, isChecked, maxlength=45 }) => 
     const handleClickOutside = (event: any) => {
       if (containerRef.current && !containerRef?.current.contains(event.target)) {
         // put modal to warn here
-        setIsEditing(false)
+        setIsEditing(false);
       } 
     }
 
-    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
