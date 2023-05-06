@@ -44,14 +44,14 @@ h2 {
 .main-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: stretch; //center
   width: 720px;
   height: 500px;
   // height: 620px;
   background: $color-base-inside;
   border-radius: 20px;
-  padding: 0px 100px 0px 100px;
+  padding: 50px 100px 50px 100px;
   box-sizing: border-box;
 
 }
