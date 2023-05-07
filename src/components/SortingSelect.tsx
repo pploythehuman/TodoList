@@ -58,7 +58,7 @@ const SortingSelect: React.FC<SortingSelectProps> = ({ selectedValue, onSelected
               {selectValue === option.value ? (
                 <div className="selected-option">{option.label}</div>
               ) : (
-                <p style={{ fontSize: '13px', textAlign: 'left' }}>{option.label}</p>
+                <p style={{ fontSize: '13px' }}>{option.label}</p>
               )}
             </label>
             <input

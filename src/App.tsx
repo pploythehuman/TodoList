@@ -81,24 +81,26 @@ function App() {
       <div className="main-container">
         <ProgressBar completeAmount={getCompletedTasksCount(tasks)} totalAmount={tasks.length}/>
 
-        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: '10px' }}>
-          <h3 style={{ margin: "0px" }}>Tasks</h3>
-          <SortingSelect selectedValue={selectedSortingOption} onSelectedValueChange={setSelectedSortingOption} />
-        </div>
+        <div className="tasks-sort-container">
+          <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginTop: '30px' }}>
+            <h3 style={{ margin: "0px" }}>Tasks</h3>
+            <SortingSelect selectedValue={selectedSortingOption} onSelectedValueChange={setSelectedSortingOption} />
+          </div>
 
-        <div className="tasks-container"> 
-          {filterTasks(tasks, selectedSortingOption).map((taskItem: ITask) =>{
-            return(
-              <TaskItem 
-              key={taskItem.id}
-              taskId={taskItem.id}
-              title={taskItem.title}
-              isChecked={taskItem.completed}
-              onDelete={handleDeleteTask}
-              onSave={handleChangeTaskTitle}
-              onMark={handleMarkTask}
-            />
-          )})}
+          <div className="tasks-container"> 
+            {filterTasks(tasks, selectedSortingOption).map((taskItem: ITask) =>{
+              return(
+                <TaskItem 
+                key={taskItem.id}
+                taskId={taskItem.id}
+                title={taskItem.title}
+                isChecked={taskItem.completed}
+                onDelete={handleDeleteTask}
+                onSave={handleChangeTaskTitle}
+                onMark={handleMarkTask}
+              />
+            )})}
+          </div>
         </div>
         
         <TaskInput 
