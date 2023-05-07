@@ -51,9 +51,11 @@ const TaskItem:React.FC<TaskItemProps>= ({
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
-      if (containerRef.current && !containerRef?.current.contains(event.target)) {
-        // put modal to warn here
-        setIsEditing(false);
+      if (containerRef.current && !containerRef?.current.contains(event.target) && isEditing) {
+        const discard = window.confirm('Do you want to discard unsaved changes?');
+        if (discard) {
+          setIsEditing(false);
+        }
       } 
     }
 
@@ -61,7 +63,7 @@ const TaskItem:React.FC<TaskItemProps>= ({
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [containerRef])
+  }, [containerRef, isEditing])
 
   return(
     <div className="task-item" ref={containerRef}>
