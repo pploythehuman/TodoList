@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PieChartOutlined } from '@ant-design/icons';
 
 interface TaskInputProps {
   value: string;
