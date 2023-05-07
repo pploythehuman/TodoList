@@ -8,9 +8,20 @@ interface TaskItemProps {
   isChecked: boolean;
   maxlength?: number;
   onDelete: Function;
+  onSave: Function;
+  onMark: Function;
 }
 
-const TaskItem:React.FC<TaskItemProps>= ({ taskId, title, maxlength=45, onDelete }) => {
+const TaskItem:React.FC<TaskItemProps>= ({ 
+  taskId, 
+  title, 
+  isChecked, 
+  maxlength=45, 
+  onDelete,
+  onSave,
+  onMark
+}) => {
+
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -23,6 +34,7 @@ const TaskItem:React.FC<TaskItemProps>= ({ taskId, title, maxlength=45, onDelete
   }
 
   const handleSave = () => {
+    onSave(taskId, tempTitleValue);
     setTitleValue(tempTitleValue);
     setIsEditing(false)
   }
@@ -51,7 +63,7 @@ const TaskItem:React.FC<TaskItemProps>= ({ taskId, title, maxlength=45, onDelete
         <label style={{ display: 'grid', gridTemplateColumns: 'auto 1fr'}}>
           <input type="checkbox" />
           <input 
-            className="task-item-title" 
+            className={`task-item-title ${isChecked? 'strike-through' : '' }`}
             type="text" 
             value={isEditing ? tempTitleValue : (titleValue.length < maxlength ? titleValue : `${titleValue.slice(0, maxlength)}...`)}
             readOnly={!isEditing}

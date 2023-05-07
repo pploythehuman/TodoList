@@ -22,8 +22,8 @@ const createTask = async(title: string) => {
   return response.data;
 }
 
-const markTask = async(taskId: string, isCompleted: boolean) => {
-  let data = JSON.stringify({ completed: isCompleted })
+const markTask = async(taskId: string, isChecked: boolean) => {
+  let data = JSON.stringify({ completed: isChecked })
   
   const response = await axios.patch(`${baseURL}/todos/${taskId}`, data, {
     headers: {

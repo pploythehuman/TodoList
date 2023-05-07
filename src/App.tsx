@@ -20,12 +20,6 @@ interface ITask {
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([])
-  // const result = await getTasks();
-  // const result = await deleteTask('f619466c-a016-4281-b584-7db2795d103d');
-  // const result = await createTask("fake title");
-  // const result = await markTask("ZG_Ly6K", true);
-  // const result = await markTask("5fe3f4ca-193c-4170-83c1-cb5a19908601", false);
-  // const result = await changeTaskTitle("ZG_Ly6K", "new title Z")
 
   const handleCreateTask = async(title: string) => {
     const newTask = await createTask(title);
@@ -38,6 +32,18 @@ function App() {
       prevTask.map((task) => {
         if (task.id === taskId) {
           return { ...task, title: newTitle}
+        }
+        return task;
+      })
+    );
+  }
+
+  const handleMarkTask = async(taskId: string, isChecked: boolean) => {
+    await markTask(taskId, isChecked);
+    setTasks((prevTask) => 
+      prevTask.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: isChecked}
         }
         return task;
       })
@@ -75,6 +81,8 @@ function App() {
               title={taskItem.title}
               isChecked={taskItem.completed}
               onDelete={handleDeleteTask}
+              onSave={handleChangeTaskTitle}
+              onMark={handleMarkTask}
             />
           )})}
         </div>

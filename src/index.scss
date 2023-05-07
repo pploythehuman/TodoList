@@ -110,6 +110,10 @@ h2 {
   @include text;
 }
 
+.strike-through {
+  text-decoration: line-through;
+}
+
 .task-item-checkbox input[type="checkbox"] {
     /* removing default appearance */
     -webkit-appearance: none;
