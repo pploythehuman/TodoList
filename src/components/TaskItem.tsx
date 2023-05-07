@@ -25,6 +25,7 @@ const TaskItem:React.FC<TaskItemProps>= ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [isEditing, setIsEditing] = useState(false);
+  const [checkValue, setCheckValue] = useState(isChecked);
   const [titleValue, setTitleValue] = useState(title);
   const [tempTitleValue, setTempTitleValue] = useState(title);
 
@@ -37,6 +38,11 @@ const TaskItem:React.FC<TaskItemProps>= ({
     onSave(taskId, tempTitleValue);
     setTitleValue(tempTitleValue);
     setIsEditing(false)
+  }
+
+  const handleMark = () => {
+    onMark(taskId, !checkValue)
+    setCheckValue(!checkValue)
   }
 
   const handleDelete = () => {
@@ -61,9 +67,9 @@ const TaskItem:React.FC<TaskItemProps>= ({
     <div className="task-item" ref={containerRef}>
       <div className="task-item-checkbox">    
         <label style={{ display: 'grid', gridTemplateColumns: 'auto 1fr'}}>
-          <input type="checkbox" />
+          <input type="checkbox" defaultChecked={checkValue} onChange={handleMark}/>
           <input 
-            className={`task-item-title ${isChecked? 'strike-through' : '' }`}
+            className={`task-item-title ${isChecked && !isEditing? 'strike-through' : '' }`}
             type="text" 
             value={isEditing ? tempTitleValue : (titleValue.length < maxlength ? titleValue : `${titleValue.slice(0, maxlength)}...`)}
             readOnly={!isEditing}
