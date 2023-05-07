@@ -5,11 +5,17 @@ interface SortingSelectProps {
   onSelectedValueChange: Function;
 }
 
-const SortingSelect:React.FC<SortingSelectProps> = ({ selectedValue, onSelectedValueChange }) => {
+const SortingSelect: React.FC<SortingSelectProps> = ({ selectedValue, onSelectedValueChange }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const [selectValue, setSelectValue] = useState(selectedValue);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const options = [
+    { value: 'All', label: 'All' },
+    { value: 'Done', label: 'Done' },
+    { value: 'Undone', label: 'Undone' },
+  ];
 
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
@@ -45,15 +51,26 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ selectedValue, onSelectedV
         <p style={{ fontSize: '13px' }}>{selectValue}</p>
         <div className="arrow" />
       </button>
-      <div className={`sorting-select-dropdown ${isDropdownOpen? '' : 'hidden'}`}>
-        <label className="select-item" htmlFor="select-all">All</label>
-        <input className="option" id="select-all" type="radio" name="option" value="All" onClick={handleOptionChange} />
-
-        <label className="select-item" htmlFor="select-done">Done</label>
-        <input className="option" id="select-done" type="radio" name="option" value="Done" onClick={handleOptionChange} />
-
-        <label className="select-item" htmlFor="select-undone">Undone</label>
-        <input className="option" id="select-undone" type="radio" name="option" value="Undone" onClick={handleOptionChange} />
+      <div className={`sorting-select-dropdown ${isDropdownOpen ? '' : 'hidden'}`}>
+        {options.map((option, index) => (
+          <React.Fragment key={index}>
+            <label className="select-item" htmlFor={`select-${option.value}`}>
+              {selectValue === option.value ? (
+                <div className="selected-option">{option.label}</div>
+              ) : (
+                <p style={{ fontSize: '13px', textAlign: 'left' }}>{option.label}</p>
+              )}
+            </label>
+            <input
+              className="option"
+              id={`select-${option.value}`}
+              type="radio"
+              name="option"
+              value={option.value}
+              onClick={handleOptionChange}
+            />
+          </React.Fragment>
+        ))}
       </div>
     </div>
   );
