@@ -20,6 +20,9 @@ interface ITask {
 
 function App() {
   const [tasks, setTasks] = useState<ITask[]>([])
+  const [selectedSortingOption, setSelectedSortingOption] = useState('All');
+
+  const getCompletedTasksCount = (tasks: ITask[]) => tasks.filter(task => task.completed).length
 
   const handleCreateTask = async(title: string) => {
     const newTask = await createTask(title);
@@ -55,6 +58,16 @@ function App() {
     setTasks((prevTask) => prevTask.filter((task) => task.id !== taskId));
   }
 
+  const filterTasks = (tasks: ITask[], selectedOption: string) => {
+    if (selectedOption == 'Done') {
+      return tasks.filter(tasks => tasks.completed)
+    } else if (selectedOption == 'Undone') {
+      return tasks.filter(tasks => !tasks.completed)
+    } else {
+      return tasks
+    }
+  }
+
   useEffect(() => {
     const fetchTaskData = async() => {
       const result = await getTasks();
@@ -66,14 +79,15 @@ function App() {
   return (
     <div className="app-container">
       <div className="main-container">
-        <ProgressBar completeAmount={12} totalAmount={20}/>
+        <ProgressBar completeAmount={getCompletedTasksCount(tasks)} totalAmount={tasks.length}/>
+
+        <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: '10px' }}>
+          <h3 style={{ margin: "0px" }}>Tasks</h3>
+          <SortingSelect selectedValue={selectedSortingOption} onSelectedValueChange={setSelectedSortingOption} />
+        </div>
 
         <div className="tasks-container"> 
-          <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", marginBottom: '10px' }}>
-            <h3 style={{ margin: "0px" }}>Tasks</h3>
-            <SortingSelect />
-          </div>
-          {tasks.map((taskItem: ITask) =>{
+          {filterTasks(tasks, selectedSortingOption).map((taskItem: ITask) =>{
             return(
               <TaskItem 
               key={taskItem.id}

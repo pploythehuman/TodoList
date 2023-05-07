@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 interface SortingSelectProps {
-
+  selectedValue: string;
+  onSelectedValueChange: Function;
 }
 
-const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
+const SortingSelect:React.FC<SortingSelectProps> = ({ selectedValue, onSelectedValueChange }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
-  const [selectValue, setSelectValue] = useState('All');
+  const [selectValue, setSelectValue] = useState(selectedValue);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
   const toggleDropdown = () => {
@@ -16,7 +17,7 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
 
   const handleOptionChange = (event: any) => {
     if (event) {
-      setSelectValue(event.target.value);
+      onSelectedValueChange(event.target.value);
     }
     setIsDropdownOpen(false);
   }
@@ -33,6 +34,10 @@ const SortingSelect:React.FC<SortingSelectProps> = ({ }) => {
       document.removeEventListener('mousedown', handleClickOutside);
     }
   }, [containerRef])
+
+  useEffect(() => {
+    setSelectValue(selectedValue);
+  }, [selectedValue]);
 
   return (
     <div className="sorting-select-group" ref={containerRef}>

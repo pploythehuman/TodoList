@@ -12,7 +12,7 @@ const ProgressBar:React.FC<ProgressBarProps>= ({ completeAmount, totalAmount }) 
       <h2>Progress</h2>
       <div className="bar-container">
         <div className="background-bar" />
-        <div className="fill-bar" style={{ width: `${percent}%`}}/>
+        <div className="fill-bar" style={{ width: `${percent}%`, maxWidth: '100%'}}/>
       </div>
       <p>{completeAmount} completed</p>
     </div>
